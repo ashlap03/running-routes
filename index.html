@@ -126,7 +126,7 @@ function rateUI(r,note){var X=$('rate');if(!X)return;X.innerHTML='';var a=el('di
   a.appendChild(document.createTextNode(r.n?r.avg.toFixed(1)+' out of 5 · '+r.n+(r.n===1?' rating':' ratings'):'No ratings yet'));X.appendChild(a);if(!RATE_OK)return;
   if(RATED[r.id]){X.appendChild(el('div',typeof RATED[r.id]==='number'?'You rated this route '+RATED[r.id]+' out of 5. Thank you!':'You’ve already rated this route.',{className:'note'}));return}
   var pend=0,row=el('div',null,{className:'flex'}),pick=el('div',null,{className:'flex'}),btns=[],paint=function(v){btns.forEach(function(b,i){b.innerHTML=starSvg(Math.max(0,Math.min(1,v-i)),32)})},
-    sel=el('div','',{className:'note'}),box=el('div',null,{className:'flex'}),pc=el('input',null,{type:'password',placeholder:'woosterdistance'}),go=el('button','Submit rating',{className:'btn'}),msg=el('div',note||'',{className:'note'}),stored=null;
+    sel=el('div','',{className:'note'}),box=el('div',null,{className:'flex'}),pc=el('input',null,{type:'password',placeholder:'Group passcode'}),go=el('button','Submit rating',{className:'btn'}),msg=el('div',note||'',{className:'note'}),stored=null;
   try{stored=localStorage.getItem('rr-pc')}catch(e){}
   row.style.alignItems='center';row.appendChild(el('span','Would you recommend it? Rate it:',{className:'note'}));pick.style.gap='2px';
   for(var i=1;i<=5;i++)(function(i){var b=el('button',null,{className:'star',type:'button',title:'Tap once for a full star, twice for a half star'});b.innerHTML=starSvg(0,32);
@@ -176,7 +176,7 @@ function buildBox(){var X=$('addbox');X.innerHTML='';X.appendChild(el('div','Cli
   X.appendChild(chk('Follow paths and roads',BLD.snap,function(v){BLD.snap=v}));bNote=el('div','',{className:'note'});X.appendChild(bNote);
   var row=el('div',null,{className:'flex'}),c=el('button','Clear',{className:'btn ghost'}),x=el('button','Cancel',{className:'btn ghost'});
   c.onclick=function(){BLD.wp=[];BLD.legs=[];BLD.ret=null;BLD.ask=false;bDraw();bBar()};x.onclick=bExit;row.appendChild(c);row.appendChild(x);X.appendChild(row);
-  var n=el('input',null,{placeholder:'Route name'}),by=el('input',null,{placeholder:'Your name'}),t=el('select'),pc=el('input',null,{placeholder:'woosterdistance',type:'password'}),b=el('button','Save route',{className:'btn'});
+  var n=el('input',null,{placeholder:'Route name'}),by=el('input',null,{placeholder:'Your name'}),t=el('select'),pc=el('input',null,{placeholder:'Group passcode',type:'password'}),b=el('button','Save route',{className:'btn'});
   try{by.value=localStorage.getItem('rr-by')||'';pc.value=localStorage.getItem('rr-pc')||''}catch(e){}
   ['Road','Trail','Gravel','Track','Mixed'].forEach(function(o){t.appendChild(el('option',o))});
   b.onclick=function(){bSave(n,by,t,pc,b)};[n,by,t,pc,b].forEach(function(e){e.style.marginTop='6px';X.appendChild(e)});bDraw();bBar()}
